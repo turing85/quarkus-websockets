@@ -191,9 +191,22 @@
                         <phase>package</phase>
                         <configuration>
                             <appendAssemblyId>false</appendAssemblyId>
-                            <descriptors>
-                                <descriptor>src/assembly/quarkus-app-tar-gz.xml</descriptor>
-                            </descriptors>
+                            <inlineDescriptors>
+                                <inlineDescriptor>
+                                    <id>tar-gz</id>
+                                    <includeBaseDirectory>false</includeBaseDirectory>
+                                    <formats>
+                                        <format>tar.gz</format>
+                                    </formats>
+                                    <fileSets>
+                                        <fileSet>
+                                            <outputDirectory>/</outputDirectory>
+                                            <directory>${project.build.directory}/quarkus-app</directory>
+                                            <useDefaultExcludes>false</useDefaultExcludes>
+                                        </fileSet>
+                                    </fileSets>
+                                </inlineDescriptor>
+                            </inlineDescriptors>
                             <skipAssembly>${assembly-plugin.skip}</skipAssembly>
                             <tarLongFileMode>posix</tarLongFileMode>
                         </configuration>
