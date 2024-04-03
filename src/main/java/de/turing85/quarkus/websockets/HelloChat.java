@@ -44,9 +44,12 @@ public class HelloChat {
   public void onMessage(String message) {
     String userName = principal.getName();
     log.debug("User \"{}\" sent message \"{}\"", userName, message);
-    Optional.ofNullable(sessions.get(userName)).stream().flatMap(Collection::parallelStream)
+    // @formatter:off
+    Optional.ofNullable(sessions.get(userName)).stream()
+        .flatMap(Collection::parallelStream)
         .map(Session::getAsyncRemote)
         .forEach(async -> async.sendText("Hello, %s!".formatted(userName)));
+    // @formatter:on
   }
 
   @OnClose
